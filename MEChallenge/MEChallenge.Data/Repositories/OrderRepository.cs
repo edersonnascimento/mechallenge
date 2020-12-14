@@ -27,12 +27,14 @@ namespace MEChallenge.Data.Repositories
 
             order.ApprovedItens = entity.ApprovedItens;
             order.ApprovedValue = entity.ApprovedValue;
-            order.Status = entity.Status;
             _context.Orders.Update(order);
         }
-        public Task Delete(string id)
+        public async Task Delete(string id)
         {
-            throw new NotImplementedException();
+            var order = await GetById(id);
+            if(order != null) {
+                _context.Orders.Remove(order);
+            }
         }
     }
 }

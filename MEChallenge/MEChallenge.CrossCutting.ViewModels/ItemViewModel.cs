@@ -1,8 +1,7 @@
-﻿namespace MEChallenge.Domain.Models
+﻿namespace MEChallenge.CrossCutting.ViewModels
 {
-    public class Item
+    public class ItemViewModel
     {
-        public string PedidoId { get; set; }
         public string Description { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Quantity { get; set; }

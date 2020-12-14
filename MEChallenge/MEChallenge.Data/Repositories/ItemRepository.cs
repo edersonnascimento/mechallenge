@@ -35,9 +35,5 @@ namespace MEChallenge.Data.Repositories
                 _context.Items.Remove(item);
             }
         }
-
-
-
-
     }
 }
