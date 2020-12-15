@@ -123,7 +123,7 @@ namespace MEChallenge.Application.Services
 
             changeOrderStatus(model, order);
 
-            if (model.Status.ToLower() == "REPROVADO") {
+            if (model.Status.ToUpper() == "REPROVADO") {
                 return new StatusResultViewModel { Pedido = model.Pedido, Status = new List<string> { "REPROVADO" } };
             }
 
