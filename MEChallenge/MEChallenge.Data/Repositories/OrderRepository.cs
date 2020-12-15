@@ -14,8 +14,8 @@ namespace MEChallenge.Data.Repositories
     {
         public OrderRepository(ChallengeContext context) : base(context) { }
 
-        public async Task<Order> GetById(string id) => await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
-        public async Task<IEnumerable<Order>> GetAll() => await _context.Orders.ToListAsync();
+        public async Task<Order> GetById(string id) => await _context.Orders.Include(o => o.Items).FirstOrDefaultAsync(o => o.Id == id);
+        public async Task<IEnumerable<Order>> GetAll() => await _context.Orders.Include(o => o.Items).ToListAsync();
         public async Task<IEnumerable<Order>> Find(Expression<Func<Order, bool>> filter) => await _context.Orders.Where(filter).ToListAsync();
         public async Task Save(Order entity)
         {

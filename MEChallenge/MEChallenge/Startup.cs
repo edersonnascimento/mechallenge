@@ -1,22 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MEChallenge.Application.Interfaces;
 using MEChallenge.Application.Services;
 using MEChallenge.Application.Validators;
+using MEChallenge.Configurations;
 using MEChallenge.Data;
 using MEChallenge.Data.Repositories;
 using MEChallenge.Domain.Interfaces;
 using MEChallenge.Domain.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace MEChallenge
 {
@@ -42,6 +37,12 @@ namespace MEChallenge
             services.AddScoped<IValidator<Item>, ItemValidator>();
 
             services.AddTransient<OrderService>();
+
+            services.AddSwaggerConfig();
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options => {
+                options.IncludeXmlComments(System.String.Format(@"{0}MEChallenge.xml", System.AppDomain.CurrentDomain.BaseDirectory));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +59,16 @@ namespace MEChallenge
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
+
+            #region Swagger
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s => {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "MEChallenge API v1.0");
+                s.RoutePrefix = string.Empty;
+            });
+
+            #endregion
         }
     }
 }

@@ -3,7 +3,7 @@ using MEChallenge.Domain.Interfaces;
 
 namespace MEChallenge.Application.Queries
 {
-    public abstract class AbstractQuery<TResult, TParam, TKey> : IQuery<TResult, TParam>
+    public abstract class AbstractQuery<TResult, TParam, TKey> : IParamQuery<TResult, TParam>
     {
         protected IRepository<TResult, TKey> _repository;
 

@@ -1,7 +1,11 @@
 ﻿namespace MEChallenge.Application.Interfaces
 {
-    public interface IQuery<TResult, TParam>
+    public interface IParamQuery<TResult, TParam>
     {
         TResult Query(TParam param);
+    }
+    public interface IQuery<TResult>
+    {
+        TResult Query();
     }
 }

@@ -8,6 +8,6 @@ namespace MEChallenge.CrossCutting.ViewModels
     {
         public string Id { get; set; }
 
-        public List<ItemViewModel> Itens { get; set; } = new List<ItemViewModel>();
+        public List<ItemViewModel> Items { get; set; } = new List<ItemViewModel>();
     }
 }

@@ -21,35 +21,49 @@ namespace MEChallenge.Controllers
 
         // GET: api/<PedidoController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_orderService.All());
         }
 
         // GET api/<PedidoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(string id)
         {
-            return "value";
+            return Ok(_orderService.GetById(id));
         }
 
         // POST api/<PedidoController>
         [HttpPost]
-        public void Post([FromBody] InsertOrderViewModel value)
+        public IActionResult Post([FromBody] InsertOrderViewModel value)
         {
-
+            _orderService.Insert(value);
+            if (_orderService.Valid) {
+                return Ok();
+            }
+            return BadRequest(_orderService.Notifications);
         }
 
         // PUT api/<PedidoController>/5
         [HttpPut("{id}")]
-        public void Put(string id, [FromBody] UpdateOrderViewModel value)
+        public IActionResult Put(string id, [FromBody] UpdateOrderViewModel value)
         {
+            _orderService.Update(id, value);
+            if (_orderService.Valid) {
+                return Ok();
+            }
+            return BadRequest(_orderService.Notifications);
         }
 
         // DELETE api/<PedidoController>/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public IActionResult Delete(string id)
         {
+            _orderService.Delete(id);
+            if (_orderService.Valid) {
+                return Ok();
+            }
+            return BadRequest(_orderService.Notifications);
         }
     }
 }

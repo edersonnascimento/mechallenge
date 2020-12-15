@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MEChallenge.CrossCutting.ViewModels\MEChallenge.CrossCutting.ViewModels.csproj" />
+    <ProjectReference Include="..\MEChallenge.Data\MEChallenge.Data.csproj" />
     <ProjectReference Include="..\MEChallenge.Domain\MEChallenge.Domain.csproj" />
   </ItemGroup>
 
